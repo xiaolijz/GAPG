@@ -6,4 +6,4 @@ Abstract— Grasping target objects is a fundamental skill for robotic manipulat
 
 
 #### Code & Weight
-Thank you for your interest. We plan to upload the code and model weights before June.
+Thank you for your interest. We plan to upload the code and model weights before June this year.
