@@ -15,7 +15,7 @@ import utils
 from torch.optim.lr_scheduler import  LambdaLR
 from sklearn.model_selection import train_test_split
 
-class GraspPushDataset(Dataset):
+class GraspDataset(Dataset):
     def __init__(self, global_npy_dir, pose_txt, label_txt, augment=True):
         self.global_npy_files = sorted(
             [os.path.join(global_npy_dir, f) for f in os.listdir(global_npy_dir) if f.endswith('.npy')],
@@ -95,7 +95,7 @@ def parse_args():
     parser.add_argument('--seed', type=int, default=55926)
     parser.add_argument('--load_model', action='store_true', default=False)
     parser.add_argument('--model_path', type=str, default='save/your_model_path.pth')
-    parser.add_argument('--global_ply_dir', type=str, default='your data path/npy_global')
+    parser.add_argument('--global_npy_dir', type=str, default='your data path/npy_global')
     parser.add_argument('--pose_txt', type=str, default='your data path/poses.txt')
     parser.add_argument('--label_txt', type=str, default='your data path/labels.txt')
     parser.add_argument('--width',type=int,default=128)
@@ -139,8 +139,8 @@ def train():
     g_val   = torch.Generator().manual_seed(args.seed + 456)
     device = torch.device(args.device)
 
-    train_dataset = GraspPushDataset(args.global_ply_dir,  args.pose_txt, args.label_txt, augment=True)
-    val_dataset = GraspPushDataset(args.global_ply_dir,  args.pose_txt, args.label_txt, augment=False)
+    train_dataset = GraspDataset(args.global_npy_dir,  args.pose_txt, args.label_txt, augment=True)
+    val_dataset = GraspDataset(args.global_npy_dir,  args.pose_txt, args.label_txt, augment=False)
 
     total_size = len(train_dataset)
     val_ratio = args.val_ratio
@@ -275,7 +275,6 @@ def train():
             writer.add_scalar("Loss/val_correct_rate_epoch", val_acc, epoch)
             print(f"Epoch {epoch+1}: Train Loss = {avg_train_loss:.4f}, Val Loss = {avg_val_loss:.4f}")
 
-            # ---------- 计算并保存 o ----------
             if len(tp_scores_epoch) > 0:
                 tp_scores_epoch = torch.cat(tp_scores_epoch).numpy()       
                 o_epoch = float(tp_scores_epoch.mean())                    
