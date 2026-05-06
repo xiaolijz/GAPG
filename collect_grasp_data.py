@@ -1,3 +1,4 @@
+import os
 from env.my_environment import Environment      
 import argparse
 import numpy as np
@@ -16,6 +17,8 @@ torch.manual_seed(1111)
 num_episode = 15000
 episode = 0
 graspnet = Graspnet() 
+save_dir = "env_data_collection/grasp_data/ply_global"
+os.makedirs(save_dir, exist_ok=True)
 with tqdm(total=num_episode) as pbar:
     while True:
         #----reset environment----
@@ -37,8 +40,8 @@ with tqdm(total=num_episode) as pbar:
             if poses is None or len(poses.translations) == 0:
                 continue
             #----record pc----
-            ply_global_name = f"env_data_collection/D2/ply_global/global_{episode:05d}.ply"
-            utils.write_ply(ply_global, ply_global_name)
+            ply_global_name = os.path.join(save_dir, f"global_{episode:05d}.npy")
+            np.save(ply_global_name, ply_global)
 
             pose_num = np.random.randint(len(poses))
             pose_translation = poses.translations[pose_num]
@@ -50,7 +53,7 @@ with tqdm(total=num_episode) as pbar:
             pose[:3,3] = pose_translation
             record_pose = np.hstack([pose_translation,quaternion])
             #----record grasp poses----
-            with open("env_data_collection/D2/poses.txt", "a") as file:
+            with open("env_data_collection/grasp_data/poses.txt", "a") as file:
                 file.write(
                     f"{record_pose[0]} {record_pose[1]} {record_pose[2]} {record_pose[3]} {record_pose[4]} {record_pose[5]} {record_pose[6]}"
                     + "\n"
@@ -58,7 +61,7 @@ with tqdm(total=num_episode) as pbar:
             #----execute grasp----
             success, grasped_obj_id, done = env.step(pose)
             #----record label----
-            with open('env_data_collection/D2/labels.txt','a') as f:
+            with open('env_data_collection/grasp_data/labels.txt','a') as f:
                 f.write(f"{int(obj_num==grasped_obj_id)}\n")
             
             # np.save(f"env_data_collection/ground_true_dateset/mask/mask_{episode:05d}.npy", mask)

@@ -1,3 +1,4 @@
+import os
 from env.my_environment import Environment      
 import argparse
 import numpy as np
@@ -21,6 +22,8 @@ episode = 0
 obj_num = 12
 dir = 'your_grasp_model.pt'
 graspnet = GraspEval(model_dir=dir, seed=my_seed, device='cuda') 
+save_dir = "env_data_collection/push_data/ply_global"
+os.makedirs(save_dir, exist_ok=True)
 with tqdm(total=num_episode) as pbar:
     while True:
         #----environment reset----
@@ -38,7 +41,7 @@ with tqdm(total=num_episode) as pbar:
             pcd_mask = utils.get_fuse_pointcloud(env, target_obj)
             pcd_obj = utils.get_fuse_pointcloud(env, target_obj,id=1)
 
-        grasp_evaluation, best_grasp_action, best_pre = graspnet.evalueate_grasp_without_interaction(ply_global, pcd_mask, push_flag=False)
+        grasp_evaluation, best_grasp_action, best_pre = graspnet.evalueate_grasp_actions(ply_global, pcd_mask, push_flag=False)
         if grasp_evaluation:
             # success, grasped_obj_id, done_grasp = env.step(best_grasp_action)
             continue
@@ -101,7 +104,8 @@ with tqdm(total=num_episode) as pbar:
                     with open('env_data_collection/push_data/labels.txt','a') as f:
                         f.write(f"{label}\n")
                     # ----record pc----
-                    ply_global_name = f"env_data_collection/push_data/ply_global_labels/npy_global_{episode:05d}.npy"
+                    # ply_global_name = f"env_data_collection/push_data/ply_global/npy_global_{episode:05d}.npy"
+                    ply_global_name = os.path.join(save_dir, f"global_{episode:05d}.npy")
                     np.save(ply_global_name,ply_global_labels)
                     pbar.update(1)
                     continue
@@ -120,8 +124,8 @@ with tqdm(total=num_episode) as pbar:
             with open('env_data_collection/push_data/labels.txt','a') as f:
                 f.write(f"{label}\n")
             #----record pc----
-            ply_global_name = f"env_data_collection/push_data/ply_global_labels/npy_global_{episode:05d}.npy"
-            # ply_obj_name = f"env_data_collection/push_data_v1/obj_npy/npy_obj_{episode:05d}.npy"
+            # ply_global_name = f"env_data_collection/push_data/ply_global_labels/npy_global_{episode:05d}.npy"
+            ply_global_name = os.path.join(save_dir, f"global_{episode:05d}.npy")
 
             np.save(ply_global_name,ply_global_labels)
             # np.save(ply_obj_name,ply_obj)
