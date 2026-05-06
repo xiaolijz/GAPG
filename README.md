@@ -32,8 +32,8 @@ The code has been tested under the following environment:
 | OS | Ubuntu 20.04 |
 | Python | 3.8 |
 | PyBullet | 3.2.7 |
-| CUDA | 12.1 |
-| GPU | NVIDIA GTX 3060Ti, 12 GB memory |
+| CUDA | 11.8 |
+| GPU | NVIDIA GTX 4060Ti, 8 GB memory |
 
 ---
 
@@ -56,15 +56,19 @@ conda activate gapg
 ### 3. Install Python Dependencies
 
 ```bash
+pip install torch==2.4.1+cu118 torchvision==0.19.1+cu118 torchaudio==2.4.1+cu118 --index-url https://download.pytorch.org/whl/cu118
 pip install -r requirements.txt
 ```
+### Note
+requirements.txt contains graspnetAPI, please modify it to your local path, for example:
+graspnetAPI @ file:///home/your_user/your_project_path/models/graspnetAPI
 
 ### 4. Install PointNet2
 
 ```bash
 cd models/graspnet/pointnet2
 python setup.py install
-cd ../../../..
+cd ../../..
 ```
 
 ### 5. Install KNN Module
@@ -72,22 +76,26 @@ cd ../../../..
 ```bash
 cd models/graspnet/knn
 python setup.py install
-cd ../../../..
+cd ../../..
+```
+### 6. Install Pytorch3D
+
+```bash
+conda install https://anaconda.org/pytorch3d/pytorch3d/0.7.8/download/linux-64/pytorch3d-0.7.8-py38_cu118_pyt241.tar.bz2
+
 ```
 
 ---
 
 ## Data Collection
 
-### 1. Collect Grasp Data
+### 1. Collect Data
 
 To collect grasp data for training the grasp module, run:
 
 ```bash
 python collect_grasp_data.py
 ```
-
-### 2. Collect Push Data
 
 To collect push data for training the push module, run:
 
