@@ -61,7 +61,10 @@ pip install -r requirements.txt
 ```
 ### Note
 requirements.txt contains graspnetAPI, please modify it to your local path, for example:
+
+```txt
 graspnetAPI @ file:///home/your_user/your_project_path/models/graspnetAPI
+```
 
 ### 4. Install PointNet2
 
@@ -89,13 +92,15 @@ conda install https://anaconda.org/pytorch3d/pytorch3d/0.7.8/download/linux-64/p
 
 ## Data Collection
 
-### 1. Collect Data
+### 1. Collect Grasp Data
 
 To collect grasp data for training the grasp module, run:
 
 ```bash
 python collect_grasp_data.py
 ```
+
+### 2. Collect Push Data
 
 To collect push data for training the push module, run:
 
