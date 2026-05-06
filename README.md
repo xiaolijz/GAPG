@@ -165,8 +165,6 @@ If you find this work useful in your research, please consider citing our paper:
 
 ## Acknowledgments
 
-Some code in this repository is borrowed from open-source projects, including [**GarmentPile**](https://github.com/AlwaySleepy/Garment-Pile) and [**Vision-Language-Grasping**](https://github.com/xukechun/Vision-Language-Grasping).
-
-We sincerely appreciate their valuable contributions to the community.
+Some code in this repository is borrowed from open-source projects, including [**GarmentPile**](https://github.com/AlwaySleepy/Garment-Pile) and [**Vision-Language-Grasping**](https://github.com/xukechun/Vision-Language-Grasping). We sincerely appreciate their valuable contributions to the community.
 
 ---
