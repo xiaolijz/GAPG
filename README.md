@@ -99,7 +99,8 @@ To collect grasp data for training the grasp module, run:
 ```bash
 python collect_grasp_data.py
 ```
-
+GraspNet pre-trained models can be downloaded from: [Google Drive](https://drive.google.com/file/d/1hd0G8LN6tRpi4742XOTEisbTXNZ-1jmk/view)
+(put the downloaded file in the `models/graspnet/checkpoints` directory)
 ### 2. Collect Push Data
 
 To collect push data for training the push module, run:
@@ -165,6 +166,7 @@ If you find this work useful in your research, please consider citing our paper:
 
 ## Acknowledgments
 
-Some code in this repository is borrowed from open-source projects, including [**GarmentPile**](https://github.com/AlwaySleepy/Garment-Pile) and [**Vision-Language-Grasping**](https://github.com/xukechun/Vision-Language-Grasping). We sincerely appreciate their valuable contributions to the community.
+Some code in this repository is borrowed from open-source projects, including [**GarmentPile**](https://github.com/AlwaySleepy/Garment-Pile), [**Vision-Language-Grasping**](https://github.com/xukechun/Vision-Language-Grasping) and [**GraspNet Baseline**](https://github.com/graspnet/graspnet-baseline). We sincerely appreciate their valuable contributions to the community.
 
 ---
+
