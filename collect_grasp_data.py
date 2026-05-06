@@ -17,7 +17,7 @@ torch.manual_seed(1111)
 num_episode = 15000
 episode = 0
 graspnet = Graspnet() 
-save_dir = "env_data_collection/grasp_data/ply_global"
+save_dir = "env_data_collection/grasp_data/npy_global"
 os.makedirs(save_dir, exist_ok=True)
 with tqdm(total=num_episode) as pbar:
     while True:

@@ -22,7 +22,7 @@ episode = 0
 obj_num = 12
 dir = 'your_grasp_model.pt'
 graspnet = GraspEval(model_dir=dir, seed=my_seed, device='cuda') 
-save_dir = "env_data_collection/push_data/ply_global"
+save_dir = "env_data_collection/push_data/npy_global"
 os.makedirs(save_dir, exist_ok=True)
 with tqdm(total=num_episode) as pbar:
     while True:
@@ -109,7 +109,7 @@ with tqdm(total=num_episode) as pbar:
                     np.save(ply_global_name,ply_global_labels)
                     pbar.update(1)
                     continue
-                next_grasp_evaluation, next_best_grasp_action, next_best_pre = graspnet.evalueate_grasp_without_interaction(next_ply_global, next_pcd_mask, push_flag=False) 
+                next_grasp_evaluation, next_best_grasp_action, next_best_pre = graspnet.evalueate_grasp_actions(next_ply_global, next_pcd_mask, push_flag=False) 
                 if next_grasp_evaluation:
                     label = torch.clip(torch.tensor(next_best_pre - 0.0),-1,1)
                 else:

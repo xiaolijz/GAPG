@@ -16,7 +16,7 @@ from sklearn.model_selection import train_test_split
 from env.constants import WORKSPACE_LIMITS as workspace_limits
 from pytorch3d.ops import sample_farthest_points
 
-class GraspPushDataset(Dataset):
+class PushDataset(Dataset):
     def __init__(self, global_npy_dir, pose_txt, label_txt, augment=True):
         self.global_npy_files = sorted(
             [os.path.join(global_npy_dir, f) for f in os.listdir(global_npy_dir) if f.endswith('.npy')],
@@ -100,7 +100,7 @@ def parse_args():
     parser.add_argument('--seed', type=int, default=55926)
     parser.add_argument('--load_model', action='store_true', default=False)
     parser.add_argument('--model_path', type=str, default='save/your_model_name.pth')
-    parser.add_argument('--global_ply_dir', type=str, default='your_global_ply_dir')
+    parser.add_argument('--global_npy_dir', type=str, default='your_global_npy_dir')
     parser.add_argument('--pose_txt', type=str, default='your_pose_txt')
     parser.add_argument('--label_txt', type=str, default='your_label_txt')
     parser.add_argument('--width',type=int,default=128)
@@ -178,8 +178,8 @@ def train():
     g_val   = torch.Generator().manual_seed(args.seed + 456)
     device = torch.device(args.device)
 
-    train_dataset = GraspPushDataset(args.global_ply_dir, args.pose_txt, args.label_txt, augment=True)
-    val_dataset = GraspPushDataset(args.global_ply_dir, args.pose_txt, args.label_txt, augment=False)
+    train_dataset = PushDataset(args.global_npy_dir, args.pose_txt, args.label_txt, augment=True)
+    val_dataset = PushDataset(args.global_npy_dir, args.pose_txt, args.label_txt, augment=False)
 
     total_size = len(train_dataset)
     val_ratio = args.val_ratio
