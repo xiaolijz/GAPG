@@ -54,10 +54,10 @@ class PushDataset(Dataset):
         normalize_fuse_points_3onehot,_,_ = utils.pc_normalize_grasp_onehot(fuse_points_3onehot)
         normalize_sence_points_3onehot,normalize_pose_points_3onehot = normalize_fuse_points_3onehot[:-1],normalize_fuse_points_3onehot[-1]
 
-        pcd = o3d.geometry.PointCloud()
-        pcd.points = o3d.utility.Vector3dVector(fuse_points_3onehot[:,:3].numpy())
-        frame = o3d.geometry.TriangleMesh.create_coordinate_frame(0.1)
-        o3d.visualization.draw_geometries([pcd, frame])
+        # pcd = o3d.geometry.PointCloud()
+        # pcd.points = o3d.utility.Vector3dVector(fuse_points_3onehot[:,:3].numpy())
+        # frame = o3d.geometry.TriangleMesh.create_coordinate_frame(0.1)
+        # o3d.visualization.draw_geometries([pcd, frame])
 
         normalize_sence_points_3onehot = normalize_sence_points_3onehot.T.to(dtype=torch.float32)  # [6, N]
         normalize_pose_points_3onehot = normalize_pose_points_3onehot.squeeze(0)

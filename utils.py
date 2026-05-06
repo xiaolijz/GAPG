@@ -1170,7 +1170,7 @@ def Transform_Push2Fixed_point_onehot(global_points_onehot: torch.Tensor,
                                   push_action: torch.Tensor) -> torch.Tensor:
 
 
-    dev  = 'cuda'
+    dev  = global_points_onehot.device
     dtype = global_points_onehot.dtype
 
     fixed_point = fixed_point.to(device=dev, dtype=dtype)      
