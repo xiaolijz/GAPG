@@ -14,10 +14,7 @@ Accepted by **ICRA 2026**.
 ## Overview
 
 We propose a **geometry-aware push-grasp synergy framework** that leverages point cloud data to integrate grasp and push evaluation. Specifically, the grasp evaluation module analyzes the geometric relationship between the gripper point cloud and the points enclosed within its closing region to determine grasp feasibility and stability. Guided by this evaluation, the push evaluation module predicts how pushing actions influence future graspable space, enabling the robot to select actions that reliably transform non-graspable states into graspable ones. By jointly reasoning about geometry in both grasping and pushing, our framework achieves safer, more efficient, and more reliable manipulation in cluttered environments.
-
-```markdown
 ![Overview of GAPG](assets/model2.png)
-```
 
 ---
 
