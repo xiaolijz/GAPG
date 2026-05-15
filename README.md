@@ -1,8 +1,8 @@
-# GAPG: Geometry-Aware Push-Grasping Synergy for Goal-Oriented Manipulation in Clutter
+# GAPG: Geometry Aware Push-Grasping Synergy for Goal-Oriented Manipulation in Clutter
 
 This is the official repository for the paper:
 
-**GAPG**: **G**eometry-**A**ware **P**ush-**G**rasping Synergy for Goal-Oriented Manipulation in Clutter, **Accepted by ICRA 2026**.
+**GAPG**: **G**eometry **A**ware **P**ush-**G**rasping Synergy for Goal-Oriented Manipulation in Clutter, **Accepted by ICRA 2026**.
 
 - Paper: [arXiv:2603.21195](https://arxiv.org/abs/2603.21195)
 
