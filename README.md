@@ -6,7 +6,7 @@ This is the official repository for the paper:
 
 - Paper: [arXiv:2603.21195](https://arxiv.org/abs/2603.21195)
 - Video: [Youtube](https://www.youtube.com/watch?v=s-vxd0VMBcc)
-- 
+  
 ---
 
 ## Overview
