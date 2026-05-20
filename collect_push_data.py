@@ -80,7 +80,9 @@ with tqdm(total=num_episode) as pbar:
             episode += 1
             valid_obj_num = utils.is_in_workplace(env,target_obj) 
             if not valid_obj_num:
-                label = -1.0
+                # label = -1.0
+                label = 0.0
+
             #----get next state to evaluate grasp prob----
             if valid_obj_num:
                 next_pcd_obj = utils.get_fuse_pointcloud(env, target_obj,id=1)
@@ -111,7 +113,9 @@ with tqdm(total=num_episode) as pbar:
                     continue
                 next_grasp_evaluation, next_best_grasp_action, next_best_pre = graspnet.evalueate_grasp_actions(next_ply_global, next_pcd_mask, push_flag=False) 
                 if next_grasp_evaluation:
-                    label = torch.clip(torch.tensor(next_best_pre - 0.0),-1,1)
+                    # label = torch.clip(torch.tensor(next_best_pre - 0.0),-1,1)
+                    label = 1
+
                 else:
                     label = 0.0
             #----record push action---- 
