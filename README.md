@@ -6,6 +6,11 @@ This is the official repository for the paper:
 
 - Paper: [arXiv:2603.21195](https://arxiv.org/abs/2603.21195)
 
+<p align="center">
+  <img src="assets/s1-1.gif" width="48%" />
+  <img src="assets/r1-1.gif" width="48%" />
+</p>
+
 ---
 
 ## Overview
