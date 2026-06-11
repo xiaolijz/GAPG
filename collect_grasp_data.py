@@ -23,8 +23,8 @@ with tqdm(total=num_episode) as pbar:
     while True:
         #----reset environment----
         env.reset()
-        object_lis = env.add_objects(15, WORKSPACE_LIMITS)
-        random_numbers = np.random.choice(15, size=5, replace=False)
+        object_lis = env.add_objects(8, WORKSPACE_LIMITS)
+        random_numbers = np.random.choice(8, size=5, replace=False)
         num_obj_grasp = 5
         for i in range(num_obj_grasp):
             #----get a random target----
@@ -62,7 +62,7 @@ with tqdm(total=num_episode) as pbar:
             success, grasped_obj_id, done = env.step(pose)
             #----record label----
             with open('env_data_collection/grasp_data/labels.txt','a') as f:
-                f.write(f"{int(obj_num==grasped_obj_id)}\n")
+                f.write(f"{int(obj_num in grasped_obj_id if grasped_obj_id is not None else 0)}\n")
             
             # np.save(f"env_data_collection/ground_true_dateset/mask/mask_{episode:05d}.npy", mask)
             episode += 1
